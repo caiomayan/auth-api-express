@@ -19,17 +19,34 @@ app.use(helmet());
 app.use(cors());
 
 // Global
-app.get("/api/health", (req, res) => {
+app.get("/", (req, res) => {
+  res.send(
+    "<h1>Welcome to the Auth API</h1><p>Visit <a href='/docs'>/docs</a> for API documentation.</p><p>You can also check repository on <a href='https://github.com/caiomayan/auth-api-express' target='_blank'>GitHub</a>.</p><p>Start with <a href='/health'>/health</a> endpoint!</p>",
+  );
+});
+
+app.get("/health", (req, res) => {
   res.json({
     status: "Ok",
   });
 });
 
-app.use("/api/users", userRoutes);
+app.use("/users", userRoutes);
 
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerFile, {
+    customCssUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui.min.css",
+    customJs: [
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-bundle.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.11.0/swagger-ui-standalone-preset.min.js",
+    ],
+  }),
+);
 
 app.listen(PORT, () => {
   console.log(`auth-api is running on port ${PORT}!`);
