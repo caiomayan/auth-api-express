@@ -1,4 +1,4 @@
-# Auth API Express 🚀
+# Auth API Express
 
 [![Language](https://img.shields.io/badge/language-javascript-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Framework](https://img.shields.io/badge/framework-express-lightgrey.svg)](https://expressjs.com/)
