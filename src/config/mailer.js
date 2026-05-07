@@ -10,7 +10,7 @@ export async function sendOtpEmail(to, code) {
     from: `Auth API <noreply@${process.env.RESEND_DOMAIN_EMAIL || "resend.dev"}>`,
     to: to,
     subject: `Your verification code is: ${code}`,
-    text: `<h1>Your verification code is: ${code}</h1>`,
+    html: `<h1>Your verification code is: ${code}</h1>`,
   });
 
   if (error) {
