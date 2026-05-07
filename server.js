@@ -21,7 +21,7 @@ app.use(cors());
 // Global
 app.get("/", (req, res) => {
   res.send(
-    "<h1>Welcome to the Auth API</h1><p>Visit <a href='/docs'>/docs</a> for API documentation.</p><p>You can also check repository on <a href='https://github.com/caiomayan/auth-api-express' target='_blank'>GitHub</a>.</p><p>Start with <a href='/health'>/health</a> endpoint!</p>",
+    "<h1>Welcome to the Auth API</h1><p>You can check the repository to routes details on <a href='https://github.com/caiomayan/auth-api-express' target='_blank'>GitHub</a>.</p><p>Start with <a href='/health'>/health</a> endpoint!</p>",
   );
 });
 
