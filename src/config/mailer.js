@@ -1,27 +1,22 @@
 import "dotenv/config";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// using gmail my.account / app passwords
+// using Resend API
 
-export const transport = nodemailer.createTransport({
-  host: process.env.GMAIL_HOST,
-  port: process.env.GMAIL_PORT,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS,
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 15000,
-});
+export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendOtpEmail(to, code) {
-  await transport.sendMail({
-    from: "noreply@authapiexpress.com",
+  const { data, error } = await resend.emails.send({
+    from: `Auth API <noreply@${process.env.RESEND_DOMAIN_EMAIL}>`,
     to: to,
     subject: `Your verification code is: ${code}`,
     text: `Your verification code is: ${code}`,
   });
+
+  if (error) {
+    console.error("Error sending OTP email: ", error);
+    throw new Error("Failed to send OTP email");
+  }
+
+  console.log("OTP email sent successfully: ", data);
 }

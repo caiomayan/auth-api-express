@@ -20,7 +20,7 @@ A robust and secure authentication API built with **Express.js** and **PostgreSQ
 - **Validation:** Zod
 - **Documentation:** Swagger (OpenAPI 3.0)
 - **Infrastructure:** Docker & Docker Compose
-- **Email:** Nodemailer (for 2FA/notifications)
+- **Email:** Resend (for 2FA/notifications)
 
 ## 🔐 Key Features
 
@@ -59,15 +59,15 @@ A robust and secure authentication API built with **Express.js** and **PostgreSQ
 
 ### 📧 Email Configuration (2FA)
 
-To use the Two-Factor Authentication (2FA) feature, you need to configure an SMTP server. If you are using Gmail:
+This project uses **Resend** for sending OTP codes. To set it up:
 
-1. Enable **2-Step Verification** in your Google Account.
-2. Generate an **App Password** (Security > 2-Step Verification > App Passwords).
-3. Fill the following variables in your `.env`:
-   - `GMAIL_USER`: Your email address.
-   - `GMAIL_PASS`: The app password.
-   - `GMAIL_HOST`: `smtp.gmail.com`
-   - `GMAIL_PORT`: `587`
+1. Create a free account at [resend.com](https://resend.com).
+2. Generate an **API Key** in the dashboard.
+3. (Optional) Add and verify your own domain to send from a custom address.
+4. Update your `.env` file:
+   - `RESEND_API_KEY`: Your Resend API key.
+   - `RESEND_DOMAIN_EMAIL`: Your verified domain (e.g., `caiomayan.com`).
+     _Note: If you don't have a custom domain, Resend allows testing with their default domain, but you can only send emails to the address used to register your account._
 
 ### Execution
 
@@ -104,6 +104,11 @@ Once the server is running, you can access the interactive Swagger documentation
 ├── init              # SQL initialization scripts
 └── server.js         # Application entry point
 ```
+
+---
+
+_Developed for educational purposes and as a portfolio piece to demonstrate secure back-end development skills._
+``
 
 ---
 
